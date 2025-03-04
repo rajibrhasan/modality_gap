@@ -29,9 +29,9 @@ model_dict = {
     }   
 }
 
-def get_model_and_processor(model_name, quantize = False):
-    model_cls = model_dict['model_name']['model']
-    model_id = model_dict['model_name']['model_id']
+def get_model_and_processor(model_name, device, quantize = False):
+    model_cls = model_dict[model_name]['model']
+    model_id = model_dict[model_name]['model_id']
 
     processor = AutoProcessor.from_pretrained(model_id)
     tokenizer = None
@@ -44,10 +44,13 @@ def get_model_and_processor(model_name, quantize = False):
         model = model_cls.from_pretrained(model_id, quantization_config=quantization_config)
 
     else:
-        model = LlavaForConditionalGeneration.from_pretrained(model_id)
+        model = model_cls.from_pretrained(model_id)
 
     if model_name != 'LLaVa':
         tokenizer = AutoTokenizer.from_pretrained(model_id)
+    
+    model.eval()
+    model.to(device)
 
     return model, processor, tokenizer
     

@@ -3,3 +3,4 @@ tokenizers==0.21.0
 tqdm==4.67.1
 transformers==4.49.0
 umap-learn==0.5.7
+pycocotools==2.0.8

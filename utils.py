@@ -3,6 +3,7 @@ import umap
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
+import os
 
 def visualize(image_features, text_features, model_name, reducer):
     data = np.concatenate([image_features, text_features], 0)
@@ -13,8 +14,8 @@ def visualize(image_features, text_features, model_name, reducer):
         embedding = tsne.fit_transform(data)
     
     elif reducer == 'umap':
-        reducer = umap.UMAP(n_components=2, random_state=42)
-        embedding = reducer.fit_transform(data)
+        umap_reducer = umap.UMAP(n_components=2, random_state=42)
+        embedding = umap_reducer.fit_transform(data)
     
     else:
         raise NotImplementedError
@@ -35,7 +36,10 @@ def visualize(image_features, text_features, model_name, reducer):
     plt.ylabel(f'{reducer} 2')
     plt.legend()
 
-    plt.savefig(f'{model_name}_{reducer}.png')
+    if not os.path.exists('outputs'):
+        os.makedirs('outputs')
+
+    plt.savefig(f'outputs/{model_name}_{reducer}.png')
     plt.show()
 
 def compute_similarity(img_feats, text_feats):
