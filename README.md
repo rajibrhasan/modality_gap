@@ -9,6 +9,8 @@ git clone https://github.com/rajibrhasan/ModalityGap.git
 ### Install required libraries
 pip install -r requirements.txt
 
-### Run 
-python main.py 
+### Download Multimodal Dataset
+
+### Run
+bash scripts/llava.sh
 
