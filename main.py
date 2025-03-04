@@ -28,7 +28,7 @@ def process_by_category(args, device, data_dict, model, processor, tokenizer, af
     for key1 in supercategories:
         row = []
         for key2 in supercategories:
-            print(key1, '->', key2)
+            # print(key1, '->', key2)
             image_features = category_image_features[key1]
             text_features = category_text_features[key2]
             pairwise_distances = torch.cdist(image_features, text_features, p=2)
