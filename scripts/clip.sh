@@ -2,5 +2,7 @@ python main.py --model_name CLIP \
                 --dataset_name coco \
                 --root_dir coco2017 \
                 --reducer umap \
-                --num_ex 500
+                --by_category \
+                --batch_size 8 \
+                --num_ex 512
                  
